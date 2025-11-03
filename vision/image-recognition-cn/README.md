@@ -3,7 +3,7 @@
 **Author:** `dugufeng`
 **Tags:** `language:chinese`, `example`, `vision`, `multimodal`, `qwen-vl`
 
-一个简单的多模态工作流，输入一张图片，使用 Qwen-VL 模型返回对图片的中文描述。
+一个简单的多模态工作流，输入一张图片，使用 Qwen-VL 模型返回对图片的中文描述。1
 
 ## 🚀 如何使用
 
