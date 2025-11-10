@@ -46,8 +46,6 @@
 * **LLM 2 (Data Analyst):** (使用 `Kimi-K2-Instruct`) 接收来自 HTTP 节点的 JSON 数据和用户的原始问题，将其汇总为一份 Markdown 报告，并生成 ECharts 图表。
 * **结束节点:** 输出最终的分析报告（包含 Markdown 表格和 ECharts JSON）。
 
-## 📸 运行截图 (强烈推荐)
-
 ## 📸 工作流截图 (推荐)
 ![工作流图](screenshot-workflow.png)
 
