@@ -41,6 +41,7 @@ Your `README.md` is the "manual" for your workflow. It must be clear and helpful
 
 **Author:** `[Your GitHub Username]`
 **Tags:** `language:english | language:chinese`, `tag2`, `tag3`
+**Dify Version:** `v1.9.2+` (Please fill in the Dify version you have tested this workflow on)
 
 A brief, one-sentence description of what this workflow does.
 

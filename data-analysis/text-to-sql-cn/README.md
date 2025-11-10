@@ -2,6 +2,7 @@
 
 **Author:** `dugufeng`
 **Tags:** `language:chinese`, `text-to-sql`, `database`, `mysql`, `deepseek-coder`, `kimi`, `echarts`
+**Dify Version:** `v1.9.2+` (请填写你测试通过的 Dify 版本)
 
 这是一个高级工作流，它充当一个“数据分析师”。它将用户的自然语言问题（基于一个示例数据库）转换为 SQL，执行查询，然后使用大模型将原始数据分析并总结为一份包含 ECharts 图表的报告。
 

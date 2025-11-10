@@ -2,6 +2,7 @@
 
 **Author:** `dugufeng`
 **Tags:** `language:chinese`, `example`, `beginner`, `text-processing`, `llm`
+**Dify Version:** `v1.9.2+` (请填写你测试通过的 Dify 版本)
 
 一个简单的中文工作流，输入一段长文本，返回精炼的中文摘要。
 

@@ -50,6 +50,7 @@
 
 **Author:** `[你的 GitHub 用户名]`
 **Tags:** `language:chinese | language:english`, `标签2`, `标签3`
+**Dify 版本:** `v1.9.2+` (请填写你测试通过的 Dify 版本)
 
 (用一句话简短描述这个工作流是做什么的。)
 
