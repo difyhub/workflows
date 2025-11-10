@@ -2,7 +2,7 @@
 
 **Author:** `dugufeng`
 **Tags:** `language:english`, `example`, `beginner`, `text-processing`, `llm`
-**Dify Version:** `v1.9.2+`
+**Dify Version:** `v1.9.2+`(Please fill in the Dify version you have tested this workflow on)
 
 A simple workflow that takes a long piece of text and returns a concise summary.
 
