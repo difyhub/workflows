@@ -1,0 +1,282 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: FLUX Painting Robot
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.33@6792acf632f24f1c41a3192a78ef181f7149811a8dfd9a16ade984978613f79c
+    version: null
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 72a7d685-be48-4811-9eb4-1b1588791447
+    name: apikey
+    selector:
+    - env
+    - apikey
+    value: sk-**********************************
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1763016006320-source-1763016132507-target
+      source: '1763016006320'
+      sourceHandle: source
+      target: '1763016132507'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1763016132507-source-1763018334876-target
+      source: '1763016132507'
+      sourceHandle: source
+      target: '1763018334876'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1763018334876-source-1763018630636-target
+      source: '1763018334876'
+      sourceHandle: source
+      target: '1763018630636'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: text
+          max_length: 200
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: text
+      height: 88
+      id: '1763016006320'
+      position:
+        x: 0
+        y: 18
+      positionAbsolute:
+        x: 0
+        y: 18
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: Generate Painting Prompt
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: Qwen/Qwen3-8B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 2a601243-dab8-4fa0-8d27-a01979fd662f
+          role: system
+          text: 'You are a painting prompt generation robot based on the Flux.1 model.
+            Based on the user''s **English** description, you must automatically generate
+            an **English** painting prompt that conforms to the Flux.1 format. Your
+            goal is to generate concise, precise, and vivid English prompts to guide
+            the Flux.1 image generation model. The final output must **only** contain
+            the **English prompt**, with no other explanation or information. ###
+            **Prompt Generation Logic**: 1. **Understand User Needs**: Extract key
+            information from the user''s English description: * **Subject/Character**:
+            Appearance, actions, expressions, etc. * **Scene/Environment**: Background,
+            lighting, weather, etc. * **Style/Atmosphere**: Artistic style, emotional
+            mood, color palette, etc. * **Other Elements**: Specific objects, backgrounds,
+            or special effects. 2. **Generate Flux.1 Formatted English Prompt**: *
+            **Concise and Detailed**: The prompt must clearly describe the core object
+            and include enough detail to guide the model. * **Flexible and Diverse**:
+            Refer to the following templates and examples, but generate diverse prompts
+            based on specific needs. * **Flux.1 Style**: The prompt must follow Flux.1
+            requirements, including descriptions of artistic style, visual effects,
+            and emotional atmosphere. 3. **Flux.1 Prompt Summary - Key Points**: *
+            **Subject Description**: Clearly identify the core object or scene. *
+            **Style and Emotional Atmosphere**: Ensure the prompt includes artistic
+            style, lighting, color palette, and the overall mood. * **Dynamic and
+            Detailed Additions**: Can include actions, emotions, or light/shadow effects.
+            4. **Reference Prompt Patterns (For your learning)**: * **80s Retro Style**:
+            `blurry polaroid of [a simple description of the scene], 1980s.` * **Double
+            Exposure Effect**: `[Abstract style waterfalls, wildlife] inside the silhouette
+            of a [man]’s head that is a double exposure photograph. Non-representational,
+            colors and shapes...` * **Pixel Art Creation**: `[Anything you want] pixel
+            art style, pixels, pixel art` ### **Final Output Format (CRITICAL!)**:
+            1. You will directly output the generated English painting prompt. This
+            is the **only** text content of your reply. 2. Immediately after the English
+            prompt, you will output the special image generation tag: ` ` --- **Example
+            Interaction**: **User Input**: `An 80s retro style photo of a cozy living
+            room with vintage furniture and soft tones.` **Your Output**: `A blurry
+            polaroid of a 1980s living room, with vintage furniture, soft pastel tones,
+            and a nostalgic, grainy texture. The sunlight filters through old curtains,
+            casting long, warm shadows on the wooden floor. `'
+        - id: 96c96d63-74d6-4b36-abbe-7fb44581e295
+          role: user
+          text: '{{#1763016006320.text#}}'
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 116
+      id: '1763016132507'
+      position:
+        x: 342
+        y: 0
+      positionAbsolute:
+        x: 342
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import requests\nimport json\n\ndef main(prompt: str, apikey: str)\
+          \ -> dict:\n    url = \"https://api.siliconflow.cn/v1/image/generations\"\
+          \n    headers = {\n        \"accept\": \"application/json\",\n        \"\
+          authorization\": f\"Bearer {apikey}\",\n        \"content-type\": \"application/json\"\
+          \n    }\n    data = {\n        \"model\": \"black-forest-labs/FLUX.1-schnell\"\
+          ,\n        \"prompt\": prompt,\n        \"image_size\": \"1024x1024\"\n\
+          \    }\n    response = requests.post(url, headers=headers, data=json.dumps(data))\n\
+          \    if response.status_code == 200:\n        result = response.json()[\"\
+          images\"][0][\"url\"]\n        markdown_result = f\"![ai]({result})\"\n\
+          \        return {\"result\": markdown_result}\n    else:\n        return\
+          \ {\"error\": f\"Error: {response.status_code}, {response.text}\"}"
+        code_language: python3
+        desc: FLUX Painting
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: Code Execution
+        type: code
+        variables:
+        - value_selector:
+          - env
+          - apikey
+          value_type: string
+          variable: apikey
+        - value_selector:
+          - '1763016132507'
+          - text
+          value_type: string
+          variable: prompt
+      height: 80
+      id: '1763018334876'
+      position:
+        x: 684
+        y: 18
+      positionAbsolute:
+        x: 684
+        y: 18
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        desc: Answer
+        outputs:
+        - value_selector:
+          - '1763018334876'
+          - result
+          value_type: string
+          variable: result
+        - value_selector: []
+          variable: ''
+        selected: false
+        title: End
+        type: end
+      height: 116
+      id: '1763018630636'
+      position:
+        x: 1026
+        y: 0
+      positionAbsolute:
+        x: 1026
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 75.8190514028476
+      y: 182.24326694296434
+      zoom: 0.8096817287337023
+  rag_pipeline_variables: []
