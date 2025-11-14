@@ -43,7 +43,7 @@ This is an AI painting workflow. It receives the user's **English** painting req
 ## 📸 运行截图 (Highly Recommended)
 
 ### 工作流图
-`![Workflow Graph](screenshot-workflow.png)`
+![Workflow Graph](screenshot-workflow.png)
 
 ### 运行示例
-`![Example Run](screenshot-run.png)`
+![Example Run](screenshot-run.png)

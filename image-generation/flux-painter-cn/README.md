@@ -43,7 +43,7 @@
 ## 📸 运行截图 (Highly Recommended)
 
 ### 工作流图
-`![工作流图](screenshot-workflow.png)`
+![工作流图](screenshot-workflow.png)
 
 ### 运行示例
-`![运行示例](screenshot-run.png)`
+![运行示例](screenshot-run.png)

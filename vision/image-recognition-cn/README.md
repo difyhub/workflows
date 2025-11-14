@@ -35,9 +35,7 @@
 ## 📸 运行截图 (强烈推荐)
 
 ### 工作流图
-(请将你的 `screenshot-workflow.png` 拖放到这里)
-`![工作流图](screenshot-workflow.png)`
+![工作流图](screenshot-workflow.png)
 
 ### 运行示例
-(请将你的 `screenshot-run.png` 拖放到这里)
-`![运行示例](screenshot-run.png)`
+![运行示例](screenshot-run.png)
