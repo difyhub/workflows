@@ -51,6 +51,7 @@ Click any title below to jump straight into that workflow's README for setup ins
 | --- | --- |
 | [Image Recognition (EN)](vision/image-recognition-en/README.md) | Send in an image and let Qwen2.5-VL-32B describe it in English via SiliconFlow. |
 | [图片识别 (CN)](vision/image-recognition-cn/README.md) | 使用中文提示词和 Qwen2.5-VL-32B，对上传图片生成准确的中文描述。 |
+| [Menu OCR to Excel (菜谱识别)](vision/smart-recipe-recognition/README.md) | Upload a menu photo and get a cleaned Excel file; uses vision OCR + JSON-to-Excel pipeline (Gemini recommended). |
 
 ## 🚀 How to Use
 

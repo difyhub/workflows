@@ -53,6 +53,7 @@ DifyHub 是一个面向 Dify 工作流的开源社区和平台。本仓库存储
 | --- | --- |
 | [Image Recognition (EN)](vision/image-recognition-en/README.md) | 上传图片，调用 Qwen2.5-VL-32B-Instruct 输出英文描述。 |
 | [图片识别 (CN)](vision/image-recognition-cn/README.md) | 中文交互的图片问答模板，可输出简洁准确的中文描述。 |
+| [Menu OCR to Excel (菜谱识别)](vision/smart-recipe-recognition/README.md) | 上传菜谱照片自动提取菜名/价格并生成可下载的 Excel，基于多模态识别与 JSON→Excel 链路（推荐 Gemini）。 |
 
 ## 🚀 如何使用
 
