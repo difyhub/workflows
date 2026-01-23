@@ -1,0 +1,366 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: Smart Recipe Recognition
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/gemini:0.7.3@0cefce9c5152b4fce7a7a630004bd753000966de117d1e992b7439271d48969a
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: qiangxinglin/excel_tools:0.0.5@81147a24fa4dc871759a759bda9cf024efdba3c525815e40daba74bd7ee89c4b
+    version: null
+kind: app
+version: 0.5.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1766046709359-llm
+      selected: false
+      source: '1766046709359'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: llm-source-1766046979749-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1766046979749'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1766046979749-source-1766116684970-target
+      selected: false
+      source: '1766046979749'
+      sourceHandle: source
+      target: '1766116684970'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: answer
+      id: 1766116684970-source-answer-target
+      selected: false
+      source: '1766116684970'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 73
+      id: '1766046709359'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.1
+          mode: chat
+          name: gemini-3-flash-preview
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: d84e1d35-0c15-45b2-8e45-bf7e8340aca1
+          role: system
+          text: "# Role\n你是一个极度严谨的 OCR 数据录入员，你的任务是【逐字逐句】誊抄图片中的所有文字，绝对不允许漏掉任何括号内的备注\n\
+            \n请分析上传的图片，提取图片的数据。\n【严格格式要求】\n输出标准的 JSON 数组 [{\"key\": \"value\"}, ...]。\n\
+            如果有双引号 \" 出现在内容里，请必须将其转换为单引号 '，或者使用转义符 \\\"。\n错误示例：{\"desc\": \"Size 5\"\
+            \ tall\"}\n正确示例：{\"desc\": \"Size 5' tall\"}\n不要输出 Markdown 标记，不要输出废话。\n\
+            确保 JSON 格式完整，不要半路中断。\n\n菜单名称下面的括号内的红色备注一定要提取出来，例如：（Served with Pancakes,\
+            \ Salad& Sweet & Sour Sauce），并且拼接到菜单名称的后面。\n\n**备注捕获**：图片中许多菜名下方有缩进的、括号包裹的描述，这些备注是核心信息，非常重要，【必须】提取。\n\
+            \n“全息提取指令：\n印刷体： 完整提取编号、菜单名称（包含括号里的所有描述内容，如 （Served with Pancakes, Salad&\
+            \ Sweet & Sour Sauce）。\n完整性： 宁可多提取，不可漏掉任何一行文字。\n印刷体的菜单，如果上面有手写的字迹无需提取。\n\
+            \n请分析上传的图片，根据其实际内容，灵活定义最合适的表头（Keys），并将数据提取为 JSON 数组\n**表头定义**：根据场景逻辑，提取\
+            \ 2-5 个核心维度作为 JSON 的 Key。\n   - 例如，若是菜单，Key 可能是 [\"分类\", \"菜品名称\", \"\
+            价格\"]"
+        - id: 85af6487-ea4d-4472-af02-f98bae58d577
+          role: user
+          text: '请分析这张图片，提取其中的表格数据。
+
+            【严格要求】
+
+            只输出纯 JSON 数组，不要输出任何“好的”、“这是结果”之类的废话。
+
+            不要使用 Markdown 标记（不要写 json 也不要写）。
+
+            必须使用双引号 "，严禁使用单引号。
+
+            如果无法识别或没有数据，直接输出空数组 []
+
+
+            “请务必保留括号内的所有信息，如 (x6)、(x8) 等。”
+
+            “如果识别到不确定的单词，请结合上下文（如餐饮词汇）进行纠错，例如 Combination 而非 Combmaton。”'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 88
+      id: llm
+      position:
+        x: 379
+        y: 282
+      positionAbsolute:
+        x: 379
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1766116684970.files#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 103
+      id: answer
+      position:
+        x: 1300
+        y: 282
+      positionAbsolute:
+        x: 1300
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\nimport re\n\ndef main(arg1: str):\n    # 1. 尝试用正则表达式提取出\
+          \ JSON 数组部分 [] 或对象部分 {}\n    match = re.search(r'(\\[.*\\]|\\{.*\\})', arg1,\
+          \ re.DOTALL)\n    if match:\n        json_str = match.group(1)\n    else:\n\
+          \        json_str = arg1\n    \n    # 2. 尝试修复常见的 LLM JSON 错误（如单引号换双引号）\n\
+          \    # 注意：这里返回的是字符串，因为“JSON转EXCEL”插件通常接收的是字符串\n    try:\n        # 验证一下是不是真的合法\
+          \ JSON\n        json.loads(json_str)\n        return {\"result\": json_str}\n\
+          \    except Exception as e:\n        # 如果还是错，尝试去掉末尾可能多余的逗号或文字\n        return\
+          \ {\"result\": json_str, \"error\": str(e)}"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - llm
+          - text
+          value_type: string
+          variable: arg1
+      height: 52
+      id: '1766046979749'
+      position:
+        x: 684
+        y: 282
+      positionAbsolute:
+        x: 684
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The JSON string to convert.
+            ja_JP: The JSON string to convert.
+            pt_BR: The JSON string to convert.
+            zh_Hans: 要转换的JSON字符串。
+          label:
+            en_US: JSON String
+            ja_JP: JSON String
+            pt_BR: JSON String
+            zh_Hans: JSON字符串
+          llm_description: The JSON string to convert.
+          max: null
+          min: null
+          name: json_str
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The filename for the generated Excel file
+            ja_JP: The filename for the generated Excel file
+            pt_BR: The filename for the generated Excel file
+            zh_Hans: 生成的Excel文件的文件名
+          label:
+            en_US: Excel filename
+            ja_JP: Excel filename
+            pt_BR: Excel filename
+            zh_Hans: Excel文件名
+          llm_description: The filename that will be used for the generated Excel
+            file
+          max: null
+          min: null
+          name: filename
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          filename: ''
+          json_str: ''
+        provider_id: qiangxinglin/excel_tools/excel_tools
+        provider_name: qiangxinglin/excel_tools/excel_tools
+        provider_type: builtin
+        selected: false
+        title: Json转Excel
+        tool_configurations: {}
+        tool_description: 将Json转换为Excel。
+        tool_label: Json转Excel
+        tool_name: json2excel
+        tool_node_version: '2'
+        tool_parameters:
+          filename:
+            type: mixed
+            value: menu
+          json_str:
+            type: mixed
+            value: '{{#1766046979749.result#}}'
+        type: tool
+      height: 52
+      id: '1766116684970'
+      position:
+        x: 988
+        y: 282
+      positionAbsolute:
+        x: 988
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -424.9166205056383
+      y: 191.75426253439102
+      zoom: 0.7578582832551993
+  rag_pipeline_variables: []
